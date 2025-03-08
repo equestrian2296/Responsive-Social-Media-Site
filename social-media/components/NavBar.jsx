@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./NavBar.css";
 import NavbarOption from "./NavbarOption";
-
-// MUI Icons
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
@@ -11,93 +9,83 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import MenuIcon from "@mui/icons-material/Menu";
-
-// MUI Button
 import { Button } from "@mui/material";
+import Link from "next/link"; // Import Link for navigation
 
 function Navbar() {
   const [theme, setTheme] = useState("light");
-  const [collapsed, setCollapsed] = useState(false);
 
-  // Load theme & sidebar state from localStorage
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme") || "light";
-    setTheme(storedTheme);
-    document.documentElement.setAttribute("data-theme", storedTheme);
-
-    const storedSidebarState = localStorage.getItem("sidebarCollapsed");
-    if (storedSidebarState === "true") setCollapsed(true);
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) {
+      setTheme(storedTheme);
+      document.documentElement.setAttribute("data-theme", storedTheme);
+    }
   }, []);
 
-  // Change theme
   const handleThemeChange = (newTheme) => {
     setTheme(newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);
     localStorage.setItem("theme", newTheme);
   };
 
-  // Toggle sidebar collapse
-  const toggleSidebar = () => {
-    setCollapsed(!collapsed);
-    localStorage.setItem("sidebarCollapsed", !collapsed);
+  const handleSignOut = () => {
+    localStorage.removeItem("token"); // Clear the token
+    window.location.href = "/login"; // Redirect to login page
   };
 
   return (
-    <nav className={`navbar ${collapsed ? "collapsed" : ""}`}>
-      {/* Toggle Button */}
-      <button className="menu-toggle" onClick={toggleSidebar}>
-        <MenuIcon />
-      </button>
+    <div className="navbar">
+      <img src="path/to/your/logo.png" alt="Logo" className="navbar__logo" />
 
-      {/* Logo (replace path/to/logo.png with your actual logo) */}
-      <img src="" alt="Logo" className="navbar__logo" />
+      {/* Navigation Options */}
+      <NavbarOption active Icon={HomeIcon} text="Home" />
+      <NavbarOption Icon={SearchIcon} text="Explore" />
+      <NavbarOption Icon={NotificationsNoneIcon} text="Notifications" />
+      <NavbarOption Icon={MailOutlineIcon} text="Messages" />
+      <NavbarOption Icon={BookmarkBorderIcon} text="Bookmarks" />
+      <NavbarOption Icon={ListAltIcon} text="Lists" />
+      <NavbarOption Icon={PermIdentityIcon} text="Profile" />
+      <NavbarOption Icon={MoreHorizIcon} text="More" />
 
-      {/* Theme Switcher */}
-      <div className="theme-switcher">
+      {/* Sign Out Button */}
+      <Button onClick={handleSignOut} variant="outlined" className="navbar__signout">
+        Sign Out
+      </Button>
+
+      {/* Theme Switcher Buttons */}
+      <div className="theme-toggle">
         <button
           onClick={() => handleThemeChange("light")}
-          className={`theme-btn ${theme === "light" ? "active" : ""}`}
+          className={`theme-btn ${theme === "light" ? "active light" : ""}`}
         >
           🌙
         </button>
         <button
           onClick={() => handleThemeChange("dark")}
-          className={`theme-btn ${theme === "dark" ? "active" : ""}`}
+          className={`theme-btn ${theme === "dark" ? "active dark" : ""}`}
         >
           🌑
         </button>
         <button
           onClick={() => handleThemeChange("love")}
-          className={`theme-btn ${theme === "love" ? "active" : ""}`}
+          className={`theme-btn ${theme === "love" ? "active love" : ""}`}
         >
           💖
         </button>
         <button
           onClick={() => handleThemeChange("chill")}
-          className={`theme-btn ${theme === "chill" ? "active" : ""}`}
+          className={`theme-btn ${theme === "chill" ? "active chill" : ""}`}
         >
           ❄️
         </button>
       </div>
 
-      {/* Navigation Links */}
-      <div className="nav">
-        <NavbarOption active Icon={HomeIcon} text="Home" />
-        <NavbarOption Icon={SearchIcon} text="Explore" />
-        <NavbarOption Icon={NotificationsNoneIcon} text="Notifications" />
-        <NavbarOption Icon={MailOutlineIcon} text="Messages" />
-        <NavbarOption Icon={BookmarkBorderIcon} text="Bookmarks" />
-        <NavbarOption Icon={ListAltIcon} text="Lists" />
-        <NavbarOption Icon={PermIdentityIcon} text="Profile" />
-        <NavbarOption Icon={MoreHorizIcon} text="More" />
-      </div>
-
-      {/* Tweet Button */}
-      <Button variant="contained" className="tweet-btn" fullWidth>
-        Tweet
+      {/* Post Button */}
+      <Button variant="outlined" className="navbar__post" fullWidth>
+        Post
       </Button>
-    </nav>
+    </div>
   );
 }
 
