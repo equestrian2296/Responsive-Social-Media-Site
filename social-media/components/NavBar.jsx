@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./NavBar.css";
+import styles from "./NavBar.module.css"; // Updated import to use CSS module
 import NavbarOption from "./NavbarOption";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
@@ -35,8 +35,8 @@ function Navbar() {
   };
 
   return (
-    <div className="navbar">
-      <img src="path/to/your/logo.png" alt="Logo" className="navbar__logo" />
+    <div className={styles.navbar}>
+      <img src="path/to/your/logo.png" alt="Logo" className={styles.navbar__logo} />
 
       {/* Navigation Options */}
       <NavbarOption active Icon={HomeIcon} text="Home" />
@@ -49,40 +49,40 @@ function Navbar() {
       <NavbarOption Icon={MoreHorizIcon} text="More" />
 
       {/* Sign Out Button */}
-      <Button onClick={handleSignOut} variant="outlined" className="navbar__signout">
+      <Button onClick={handleSignOut} variant="outlined" className={styles.navbar__signout}>
         Sign Out
       </Button>
 
       {/* Theme Switcher Buttons */}
-      <div className="theme-toggle">
+      <div className={styles.themeToggle}>
         <button
           onClick={() => handleThemeChange("light")}
-          className={`theme-btn ${theme === "light" ? "active light" : ""}`}
+          className={`${styles.themeBtn} ${theme === "light" ? styles.active : ""}`}
         >
           🌙
         </button>
         <button
           onClick={() => handleThemeChange("dark")}
-          className={`theme-btn ${theme === "dark" ? "active dark" : ""}`}
+          className={`${styles.themeBtn} ${theme === "dark" ? styles.active : ""}`}
         >
           🌑
         </button>
         <button
           onClick={() => handleThemeChange("love")}
-          className={`theme-btn ${theme === "love" ? "active love" : ""}`}
+          className={`${styles.themeBtn} ${theme === "love" ? styles.active : ""}`}
         >
           💖
         </button>
         <button
           onClick={() => handleThemeChange("chill")}
-          className={`theme-btn ${theme === "chill" ? "active chill" : ""}`}
+          className={`${styles.themeBtn} ${theme === "chill" ? styles.active : ""}`}
         >
           ❄️
         </button>
       </div>
 
       {/* Post Button */}
-      <Button variant="outlined" className="navbar__post" fullWidth>
+      <Button variant="outlined" className={styles.navbar__post} fullWidth>
         Post
       </Button>
     </div>
