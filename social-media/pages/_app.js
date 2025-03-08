@@ -1,10 +1,10 @@
-import ThemeSwitcher from '../components/ThemeSwitcher';
+import Navbar from '../components/NavBar';
 import '../styles/globals.css';
 
 function App({ Component, pageProps }) {
   return (
     <div>
-      <ThemeSwitcher />
+      <Navbar />
       <Component {...pageProps} />
     </div>
   );
