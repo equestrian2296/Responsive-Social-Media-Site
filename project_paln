@@ -1,0 +1,28 @@
+/social-media  
+│── /pages  
+│   ├── index.js  Home Page 
+│   ├── login.js  User Login Page  
+│   ├── post/[id].js  Dynamic Post Details Page
+│   ├── profile/[id].js   Dynamic User Profile Page   
+│   ├── 404.js   Custom error page   
+│  
+│── /components  
+│   ├── Navbar.js   Navigation bar + Theme toggle   
+│   ├── Post.js   Reusable post card component   
+│   ├── PostDetail.js   Detailed post view   
+│   ├── SearchBar.js   Search functionality   
+│   ├── Pagination.js   Handles post pagination   
+│   ├── UserProfile.js   User profile details   
+│  
+│── /styles  
+│   ├── globals.css   Global styles   
+│   ├── theme.css   Theme-specific styles   
+│  
+│── /lib  
+│   ├── api.js   Handles all API requests   
+│   ├── auth.js   Authentication logic for NextAuth   
+│  
+│── next.config.js   Next.js configuration file   
+│── tailwind.config.js   TailwindCSS configuration file   
+│── package.json   Project dependencies & scripts   
+│── .env.local   Environment variables for API keys, JWT secret   
